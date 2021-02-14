@@ -15,20 +15,25 @@ public class Details extends JFrame
         super(title);
         
         
-         setLayout(new BorderLayout());
-         setBackground(Color.gray);
+        setLayout(new BorderLayout());
+        setBackground(Color.gray);
          
-         Menu m = new Menu();
+	 //adding menubar
+        Menu m = new Menu();
         setJMenuBar(m.mb);
-        
-          JLabel b = new JLabel("BANKBANK", SwingConstants.CENTER);
+	
+         //adding label with font
+        JLabel b = new JLabel("BANKBANK", SwingConstants.CENTER);
         Font f1 = new Font(Font.SERIF, Font.BOLD,  24);
         b.setFont(f1);
         add(b,BorderLayout.NORTH);
         
+	 //adding panel
         panel = new JPanel();
         add(panel, BorderLayout.CENTER);
         setupp1();
+	
+	 //adding Button to change password
         JButton changeP = new JButton("Change Password");
         changeP.addActionListener(new changep());
         add(changeP, BorderLayout.SOUTH);
@@ -37,6 +42,7 @@ public class Details extends JFrame
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         } 
+	
         public void  setupp1() {
          try {
                     Database db = new Database();
@@ -59,27 +65,32 @@ public class Details extends JFrame
                         
                         panel.setVisible(true);
                         panel.setPreferredSize(new Dimension(400,400));
-                       db.closeConnection();
+			
+                        db.closeConnection();
+			
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
           
      }
      
+     //action for changing password button
     private class changep implements ActionListener {
 
             @Override
             public void actionPerformed(ActionEvent e){
                 
-                String oldpassword = JOptionPane.showInputDialog("enter oldpassword");
+        String oldpassword = JOptionPane.showInputDialog("enter oldpassword");
         String newpassword = JOptionPane.showInputDialog("enter new password");
         try{
         Database db = new Database();
         LogIn LogIn = new LogIn();
-                Customer c = db.getCustomer(LogIn.usernam);
+        Customer c = db.getCustomer(LogIn.usernam);
+	
 		if (oldpassword == (c.getPassword())) {
-		    c.setPassword(newpassword);
-			JOptionPane.showMessageDialog(null,newpassword, "new password is set.", JOptionPane.INFORMATION_MESSAGE);
+		
+		 c.setPassword(newpassword);
+		JOptionPane.showMessageDialog(null,newpassword, "new password is set.", JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			JOptionPane.showMessageDialog(null, "invalid", "Error", JOptionPane.ERROR_MESSAGE);
 		}
@@ -88,6 +99,7 @@ public class Details extends JFrame
                         exception.printStackTrace();
                     }
         }}
+	
     public static void main (String [] args){
         new Details("Details");
        }
