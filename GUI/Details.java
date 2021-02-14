@@ -2,6 +2,10 @@
 import java.awt.*;
 import javax.swing.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
 import java.sql.SQLException;
 public class Details extends JFrame 
  {
@@ -26,7 +30,7 @@ public class Details extends JFrame
         add(panel, BorderLayout.CENTER);
         setupp1();
         JButton changeP = new JButton("Change Password");
-        
+        changeP.addActionListener(new changep());
         add(changeP, BorderLayout.SOUTH);
         
         setSize(600,600);
@@ -62,7 +66,30 @@ public class Details extends JFrame
           
      }
      
+    private class changep implements ActionListener {
+
+            @Override
+            public void actionPerformed(ActionEvent e){
+                
+                String oldpassword = JOptionPane.showInputDialog("enter oldpassword");
+        String newpassword = JOptionPane.showInputDialog("enter new password");
+        try{
+        Database db = new Database();
+        LogIn LogIn = new LogIn();
+                Customer c = db.getCustomer(LogIn.usernam);
+		if (oldpassword == (c.getPassword())) {
+		    c.setPassword(newpassword);
+			JOptionPane.showMessageDialog(null,newpassword, "new password is set.", JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, "invalid", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+            }
+            catch(Exception exception) {
+                        exception.printStackTrace();
+                    }
+        }}
     public static void main (String [] args){
         new Details("Details");
        }
-    }
+    
+}
