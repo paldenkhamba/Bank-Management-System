@@ -3,35 +3,40 @@ import java.awt.*;
 import javax.swing.*;
 
 import java.sql.SQLException;
-public class MyInfo extends JFrame //implements ActionListener
+public class MyInfo extends JFrame 
  {
         JPanel panel ;
         
+ 
         public MyInfo(String title) {
         super(title);
         
-      
+        //adding menubar
         Menu m = new Menu();
         setJMenuBar(m.mb);
         
+         //setting layout
          setLayout(new BorderLayout());
          setBackground(Color.gray);
          
-          JLabel b = new JLabel("BANKBANK", SwingConstants.CENTER);
+         //adding label with font
+        JLabel b = new JLabel("BANKBANK", SwingConstants.CENTER);
         Font f1 = new Font(Font.SERIF, Font.BOLD,  24);
         b.setFont(f1);
         add(b,BorderLayout.NORTH);
         
         panel = new JPanel();
         add(panel, BorderLayout.CENTER);
-         
+        setuppanel();
         
-        setupp1();
+        
         setSize(600,600);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         } 
-        public void  setupp1() {
+        
+        
+        public void  setuppanel() {
           try {
                     Database db = new Database();
                     LogIn LogIn = new LogIn();
