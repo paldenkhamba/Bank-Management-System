@@ -9,9 +9,8 @@ import java.sql.Connection;
 
 
 public class Database {
-	//jdbc:sqlserver://[serverName[\instanceName][:portNumber]][;property=value[;property=value]]
-	//String url = "jdbc:mysql://3366/tbl_graph?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-	String url = "jdbc:mysql://Server=localhost;Port=3306/bank management system";  
+	
+	String url = "jdbc:mysql://localhost:3306/tbl_graph?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"";  
 	String username = "tashi";
 	String password = "tashi";
 	String sql = "";
@@ -80,7 +79,7 @@ public class Database {
     	stmt = (Statement) con.createStatement();
     	rs = stmt.executeQuery(sql);
     	while (rs.next()) {
-    		int cid= rs.getInt(1);
+    		        int cid= rs.getInt(1);
 			String custName = rs.getString(2);
 			String address = rs.getString(7);
 			int phone = rs.getInt(3);
